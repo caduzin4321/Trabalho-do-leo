@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import AppShell from "@/components/AppShell";
 import { pontosRedeStore, patchPanelsStore, switchesStore } from "@/lib/storage";
 import { salasStore, type Sala } from "@/lib/salas";
 import type { PontoRede, PatchPanel, SwitchEquip, CategoriaCabo } from "@/lib/types";
@@ -28,36 +29,34 @@ export default function InventarioPage() {
   const [tab, setTab] = useState<"pontos" | "patchpanels" | "switches">("pontos");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-500 to-gray-200">
-      <main className="mx-auto max-w-6xl px-4 py-8">
-        <h1 className="mb-1 text-2xl font-bold text-white">Inventário de Cabeamento</h1>
-        <p className="mb-6 text-sm text-slate-200">
-          Cadastre patch panels e switches primeiro, depois relacione cada ponto de rede a eles.
-        </p>
+    <AppShell
+      titulo="Inventário de Cabeamento"
+      subtitulo="Cadastre patch panels e switches primeiro, depois relacione cada ponto de rede a eles."
+    >
+      <div className="mb-6 flex gap-2">
+        {[
+          { key: "pontos", label: "Pontos de Rede" },
+          { key: "patchpanels", label: "Patch Panels" },
+          { key: "switches", label: "Switches" },
+        ].map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key as typeof tab)}
+            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              tab === t.key
+                ? "bg-blue-600 text-white"
+                : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
 
-        <div className="mb-6 flex gap-2">
-          {[
-            { key: "pontos", label: "Pontos de Rede" },
-            { key: "patchpanels", label: "Patch Panels" },
-            { key: "switches", label: "Switches" },
-          ].map((t) => (
-            <button
-              key={t.key}
-              onClick={() => setTab(t.key as typeof tab)}
-              className={`rounded-md px-4 py-2 text-sm font-medium ${
-                tab === t.key ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700"
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-
-        {tab === "pontos" && <PontosRedeTab />}
-        {tab === "patchpanels" && <PatchPanelsTab />}
-        {tab === "switches" && <SwitchesTab />}
-      </main>
-    </div>
+      {tab === "pontos" && <PontosRedeTab />}
+      {tab === "patchpanels" && <PatchPanelsTab />}
+      {tab === "switches" && <SwitchesTab />}
+    </AppShell>
   );
 }
 
@@ -97,6 +96,7 @@ function PontosRedeTab() {
       alert("Preencha ao menos sala, código, patch panel e switch.");
       return;
     }
+    // PontoRede possui o campo criadoEm
     pontosRedeStore.create({
       codigo: form.codigo,
       local: sala.nome,
@@ -253,7 +253,12 @@ function PatchPanelsTab() {
       alert("Preencha o código e selecione a sala.");
       return;
     }
-    patchPanelsStore.create({ codigo: form.codigo, local: sala.nome, totalPortas: Number(form.totalPortas) || 24 });
+    // PatchPanel NÃO tem criadoEm: só código, local e total de portas
+    patchPanelsStore.create({
+      codigo: form.codigo,
+      local: sala.nome,
+      totalPortas: Number(form.totalPortas) || 24,
+    });
     setForm({ ...form, codigo: "", totalPortas: "24" });
     refresh();
   }
@@ -323,7 +328,13 @@ function SwitchesTab() {
       alert("Preencha o código e selecione a sala.");
       return;
     }
-    switchesStore.create({ codigo: form.codigo, local: sala.nome, totalPortas: Number(form.totalPortas) || 24, modelo: form.modelo });
+    // SwitchEquip NÃO tem criadoEm: só código, local, total de portas e modelo
+    switchesStore.create({
+      codigo: form.codigo,
+      local: sala.nome,
+      totalPortas: Number(form.totalPortas) || 24,
+      modelo: form.modelo,
+    });
     setForm({ ...form, codigo: "", totalPortas: "24", modelo: "" });
     refresh();
   }

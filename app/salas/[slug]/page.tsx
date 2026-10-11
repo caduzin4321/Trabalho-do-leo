@@ -61,7 +61,7 @@ export default function SalaPage() {
               ← Voltar ao dashboard
             </Link>
             <h1 className="text-2xl font-bold text-white">{sala.nome}</h1>
-            <p className="text-sm text-slate-200">{sala.desc}</p>
+            <p className="text-sm text-slate-200">{sala.descricao}</p>
           </div>
         </div>
 
