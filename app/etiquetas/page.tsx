@@ -33,7 +33,7 @@ export default function EtiquetasPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-500 to-gray-200">
+    <div className="min-h-screen bg-transparent">
       <main className="mx-auto max-w-5xl px-4 py-8">
         <h1 className="mb-1 text-2xl font-bold text-white">
           Gerador de Etiquetas

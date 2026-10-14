@@ -60,7 +60,7 @@ export default function RegisterPage() {
 
   if (!podeAcessar) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-500 to-gray-200 flex items-center justify-center px-5">
+      <div className="min-h-screen bg-transparent flex items-center justify-center px-5">
         <div className="w-full max-w-[450px] rounded-2xl border-2 border-gray-400 p-10 text-white text-center">
           <h1 className="text-2xl font-bold mb-4">Acesso restrito</h1>
           <p className="mb-6 text-sm text-slate-200">
@@ -75,7 +75,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-500 to-gray-200 flex items-center justify-center px-5">
+    <div className="min-h-screen bg-transparent flex items-center justify-center px-5">
       <div className="w-full max-w-[450px] rounded-2xl border-2 border-gray-400 p-10 text-white">
         <h1 className="text-center text-4xl font-bold mb-10">Criar Conta</h1>
 

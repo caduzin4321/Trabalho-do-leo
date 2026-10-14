@@ -15,7 +15,41 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #000;/* Fundo preto fixo com manchas cinza desfocadas (sem degradê) */
+html {
+  background-color: #000;
+}
+
+html body {
+  background: transparent;
+  min-height: 100vh;
+}
+
+html body::before,
+html body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(140px);
+}
+
+html body::before {
+  width: 520px;
+  height: 520px;
+  top: -160px;
+  left: -120px;
+  background-color: #3f3f46;
+  opacity: 0.55;
+}
+
+html body::after {
+  width: 620px;
+  height: 620px;
+  bottom: -220px;
+  right: -160px;
+  background-color: #52525b;
+  opacity: 0.35;
+}
 }

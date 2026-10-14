@@ -42,7 +42,7 @@ export default function EsqueciSenhaPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-black px-4">
+    <div className="flex min-h-screen items-center justify-center bg-transparent px-4">
       <div className="relative min-h-[520px] w-[768px] max-w-full overflow-hidden rounded-[30px] bg-white shadow-[0_5px_15px_rgba(0,0,0,0.35)] ring-1 ring-white/10">
         {/* ---------- Formulário ---------- */}
         <div className="absolute left-0 top-0 h-full w-full md:w-1/2">

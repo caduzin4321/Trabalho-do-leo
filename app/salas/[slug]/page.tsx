@@ -38,7 +38,7 @@ export default function SalaPage() {
 
   if (!sala) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-500 to-gray-200 px-5 py-16">
+      <div className="min-h-screen bg-transparent px-5 py-16">
         <div className="mx-auto max-w-2xl text-center text-white">
           <p className="mb-4">Sala não encontrada.</p>
           <Link href="/dashboard" className="underline">
@@ -50,7 +50,7 @@ export default function SalaPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-500 to-gray-200">
+    <div className="min-h-screen bg-transparent">
       <main className="mx-auto max-w-6xl px-4 py-8">
         <div className="mb-6 flex items-center justify-between">
           <div>

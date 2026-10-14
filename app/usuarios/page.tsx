@@ -42,7 +42,7 @@ export default function UsuariosPage() {
   if (!sessao) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-500 to-gray-200 px-5 py-10">
+    <div className="min-h-screen bg-transparent px-5 py-10">
       <main className="mx-auto max-w-4xl">
         <div className="mb-6 flex items-center justify-between">
           <h1 className="text-2xl font-bold text-white">

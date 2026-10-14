@@ -114,7 +114,7 @@ export default function CertificacaoPage() {
   const limite = LIMITES_POR_CATEGORIA[form.categoriaCabo];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-500 to-gray-200">
+    <div className="min-h-screen bg-transparent">
       <main className="mx-auto max-w-6xl px-4 py-8">
         <h1 className="mb-1 text-2xl font-bold text-white">
           Registro de Testes de Certificação

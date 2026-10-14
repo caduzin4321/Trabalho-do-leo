@@ -87,11 +87,11 @@ export default function Home() {
   }
 
   if (!pronto) {
-    return <div className="min-h-screen bg-gradient-to-br from-black via-gray-500 to-gray-200" />;
+    return <div className="min-h-screen bg-transparent" />;
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-black via-gray-500 to-gray-200 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-transparent px-4">
       <style>{`
         @keyframes move {
           0%, 49.99% { opacity: 0; z-index: 1; }
