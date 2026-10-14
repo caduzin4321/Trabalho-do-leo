@@ -46,9 +46,7 @@ export const usuariosStore = {
     return readAll();
   },
   existe(nomeUsuario: string): boolean {
-    return readAll().some(
-      (u) => u.nomeUsuario.toLowerCase() === nomeUsuario.toLowerCase()
-    );
+    return readAll().some((u) => u.nomeUsuario.toLowerCase() === nomeUsuario.toLowerCase());
   },
   criar(nomeUsuario: string, senha: string): Usuario {
     const items = readAll();
@@ -57,7 +55,7 @@ export const usuariosStore = {
       nomeUsuario,
       senha,
       criadoEm: new Date().toISOString(),
-      isAdmin: items.length === 0,
+      isAdmin: items.length === 0, // o primeiro usuário cadastrado vira admin
     };
     items.push(novo);
     writeAll(items);
@@ -65,11 +63,19 @@ export const usuariosStore = {
   },
   autenticar(nomeUsuario: string, senha: string): Usuario | null {
     const usuario = readAll().find(
-      (u) =>
-        u.nomeUsuario.toLowerCase() === nomeUsuario.toLowerCase() &&
-        u.senha === senha
+      (u) => u.nomeUsuario.toLowerCase() === nomeUsuario.toLowerCase() && u.senha === senha
     );
     return usuario ?? null;
+  },
+  redefinirSenha(nomeUsuario: string, novaSenha: string): boolean {
+    const items = readAll();
+    const alvo = items.find(
+      (u) => u.nomeUsuario.toLowerCase() === nomeUsuario.toLowerCase()
+    );
+    if (!alvo) return false;
+    alvo.senha = novaSenha;
+    writeAll(items);
+    return true;
   },
   remover(id: string) {
     const items = readAll().filter((u) => u.id !== id);
