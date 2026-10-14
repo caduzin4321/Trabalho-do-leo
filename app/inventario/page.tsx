@@ -204,7 +204,7 @@ function PontosRedeTab() {
                 const pp = patchPanels.find((x) => x.id === p.patchPanelId);
                 const sw = switches.find((x) => x.id === p.switchId);
                 return (
-                  <tr key={p.id} className="border-b border-slate-100">
+                  <tr key={p.id} className="border-b border-slate-100 text-slate-900">
                     <td className="py-2 pr-3 font-medium">{p.codigo}</td>
                     <td className="py-2 pr-3">
                       {p.local}
@@ -288,7 +288,7 @@ function PatchPanelsTab() {
           <thead><tr className="border-b border-slate-200 text-slate-500"><th className="py-2 pr-3">Código</th><th className="py-2 pr-3">Sala</th><th className="py-2 pr-3">Portas</th><th></th></tr></thead>
           <tbody>
             {items.map((i) => (
-              <tr key={i.id} className="border-b border-slate-100">
+              <tr key={i.id} className="border-b border-slate-100 text-slate-900">
                 <td className="py-2 pr-3 font-medium">{i.codigo}</td>
                 <td className="py-2 pr-3">{i.local}</td>
                 <td className="py-2 pr-3">{i.totalPortas}</td>
@@ -359,7 +359,7 @@ function SwitchesTab() {
           <thead><tr className="border-b border-slate-200 text-slate-500"><th className="py-2 pr-3">Código</th><th className="py-2 pr-3">Sala</th><th className="py-2 pr-3">Modelo</th><th className="py-2 pr-3">Portas</th><th></th></tr></thead>
           <tbody>
             {items.map((i) => (
-              <tr key={i.id} className="border-b border-slate-100">
+              <tr key={i.id} className="border-b border-slate-100 text-slate-900">
                 <td className="py-2 pr-3 font-medium">{i.codigo}</td>
                 <td className="py-2 pr-3">{i.local}</td>
                 <td className="py-2 pr-3">{i.modelo}</td>
