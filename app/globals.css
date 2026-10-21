@@ -1,55 +1,73 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #07111f;
+  --foreground: #f1f5f9;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  min-height: 100%;
+  background: #07111f;
 }
 
 body {
-  background-color: #000;/* Fundo preto fixo com manchas cinza desfocadas (sem degradê) */
-html {
-  background-color: #000;
-}
-
-html body {
-  background: transparent;
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
+  margin: 0;
+  color: var(--foreground);
+  background: transparent;
 }
 
-html body::before,
-html body::after {
+/* Fundo tecnológico inspirado em redes escolares */
+body::before {
   content: "";
   position: fixed;
+  inset: 0;
   z-index: -1;
   pointer-events: none;
-  border-radius: 9999px;
-  filter: blur(140px);
+
+  background-color: #07111f;
+  background-image:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(14, 165, 233, 0.16),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(37, 99, 235, 0.16),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #0b1729 50%,
+      #081321 100%
+    );
 }
 
-html body::before {
-  width: 520px;
-  height: 520px;
-  top: -160px;
-  left: -120px;
-  background-color: #3f3f46;
-  opacity: 0.55;
+/* Textura discreta de pontos */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background-image: radial-gradient(
+    rgba(125, 211, 252, 0.15) 1px,
+    transparent 1px
+  );
+
+  background-size: 32px 32px;
+  opacity: 0.28;
 }
 
-html body::after {
-  width: 620px;
-  height: 620px;
-  bottom: -220px;
-  right: -160px;
-  background-color: #52525b;
-  opacity: 0.35;
-}
+/* Evita imagens e elementos ultrapassando a tela */
+img {
+  max-width: 100%;
 }
