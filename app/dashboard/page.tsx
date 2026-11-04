@@ -173,7 +173,8 @@ export default function DashboardPage() {
         </div>
 
         {/* ---------- Seção de Salas ---------- */}
-        <div className="mt-12">
+        {/* ---------- Seção de Salas ---------- */}
+        <div id="salas" className="mt-12 scroll-mt-6">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-xl font-bold text-white">Minhas Salas ({salas.length})</h2>
             <button
