@@ -78,17 +78,15 @@ export default function ApresentacaoCarousel() {
       {/* Cabeçalho do carrossel */}
       <div className="relative z-10 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-lg font-extrabold text-white">
-            R
-          </div>
+          <img src="/logo-nexo.png" alt="Nexo" className="h-10 w-10 object-contain" />
 
           <div>
             <p className="text-sm font-bold text-white">
-              REDE ESCOLAR
+              NEXO
             </p>
 
             <p className="text-[9px] tracking-[2px] text-slate-400">
-              GESTÃO DE INFRAESTRUTURA
+              GERENCIAMENTO DE REDE
             </p>
           </div>
         </div>

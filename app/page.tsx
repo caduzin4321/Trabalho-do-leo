@@ -7,6 +7,15 @@ import Link from "next/link";
 import { usuariosStore, sessaoStore } from "@/lib/users";
 import ApresentacaoCarousel from "@/components/ApresentacaoCarousel";
 
+const inputClasse =
+  "my-2 w-full rounded-lg bg-gray-100 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-500 outline-none focus:ring-2 focus:ring-gray-400";
+
+const botaoClasse =
+  "mt-3 rounded-lg bg-black px-11 py-2.5 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-gray-800";
+
+const botaoPainelClasse =
+  "mt-3 rounded-lg border border-white bg-transparent px-11 py-2.5 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-white/10";
+
 export default function Home() {
   const router = useRouter();
 
@@ -15,7 +24,7 @@ export default function Home() {
   const [adminLogado, setAdminLogado] = useState(false);
 
   const [modalAberto, setModalAberto] = useState(false);
-  const [modoCadastro, setModoCadastro] = useState(false);
+  const [ativo, setAtivo] = useState(false); // false = Entrar | true = Criar conta
 
   // Dados do login
   const [usuario, setUsuario] = useState("");
@@ -58,7 +67,7 @@ export default function Home() {
   const podeCadastrar = !existemUsuarios || adminLogado;
 
   function abrirLogin() {
-    setModoCadastro(false);
+    setAtivo(false);
     setErroLogin("");
     setErroReg("");
     setModalAberto(true);
@@ -70,10 +79,10 @@ export default function Home() {
     setErroReg("");
   }
 
-  function alternarModo() {
-    setModoCadastro((valor) => !valor);
+  function trocar(paraCadastro: boolean) {
     setErroLogin("");
     setErroReg("");
+    setAtivo(paraCadastro);
   }
 
   // Autenticação original do projeto
@@ -134,25 +143,23 @@ export default function Home() {
       {/* ================================== */}
 
       <header className="relative z-20 border-b border-white/10 bg-[#080D14]">
-        <div className="mx-auto flex h-[76px] max-w-[1250px] items-center justify-between px-5 md:px-8">
+        <div className="relative mx-auto flex h-[76px] max-w-[1250px] items-center justify-between px-5 md:px-8">
 
           <a href="#" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-xl font-extrabold text-white shadow-lg shadow-blue-900/30">
-              R
-            </div>
+            <img src="/logo-nexo.png" alt="Nexo" className="h-10 w-10 object-contain" />
 
             <div>
               <p className="text-sm font-bold tracking-wide">
-                REDE ESCOLAR
+                NEXO
               </p>
 
               <p className="text-[9px] tracking-[2px] text-slate-500">
-                GERENCIAMENTO DE INFRAESTRUTURA
+                GERENCIAMENTO DE REDE
               </p>
             </div>
           </a>
 
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-8 md:absolute md:left-1/2 md:flex md:-translate-x-1/2">
             <a
               href="#inicio"
               className="text-sm text-slate-300 transition hover:text-white"
@@ -180,21 +187,11 @@ export default function Home() {
             onClick={abrirLogin}
             className="rounded-lg bg-lime-300 px-5 py-2.5 text-sm font-bold text-[#101810] transition hover:bg-lime-200"
           >
-            Acessar sistema <span aria-hidden="true">↗</span>
+            Entrar
           </button>
 
         </div>
       </header>
-
-      {/* ================================== */}
-      {/* FAIXA DE INFORMAÇÕES */}
-      {/* ================================== */}
-
-      <div className="border-b border-lime-300/10 bg-lime-300 py-2.5 text-center">
-        <p className="px-3 text-[10px] font-semibold tracking-wide text-[#17220C] md:text-xs">
-          TECNOLOGIA, ORGANIZAÇÃO E CONTROLE PARA A INFRAESTRUTURA DA SUA ESCOLA
-        </p>
-      </div>
 
       {/* ================================== */}
       {/* APRESENTAÇÃO PRINCIPAL */}
@@ -242,7 +239,7 @@ export default function Home() {
                 onClick={abrirLogin}
                 className="rounded-lg bg-lime-300 px-7 py-4 text-sm font-bold text-[#101810] shadow-lg shadow-lime-300/10 transition hover:-translate-y-1 hover:bg-lime-200"
               >
-                Acessar sistema <span aria-hidden="true">→</span>
+                Entrar
               </button>
 
               <a
@@ -437,7 +434,7 @@ export default function Home() {
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-8 text-slate-400 md:text-base">
-            O Sistema de Gerenciamento da Rede Escolar foi desenvolvido
+            O Nexo, sistema de gerenciamento de rede, foi desenvolvido
             para auxiliar na organização da infraestrutura de redes,
             oferecendo recursos para cadastrar ambientes, controlar
             cabeamentos, identificar conexões e acompanhar os equipamentos.
@@ -463,11 +460,11 @@ export default function Home() {
 
           <div>
             <p className="text-sm font-bold text-white">
-              REDE ESCOLAR
+              NEXO
             </p>
 
             <p className="mt-1 text-xs text-slate-500">
-              Sistema de Gerenciamento da Rede Escolar
+              Sistema de Gerenciamento de Rede
             </p>
           </div>
 
@@ -479,7 +476,7 @@ export default function Home() {
       </footer>
 
       {/* ================================== */}
-      {/* MODAL DE LOGIN E CADASTRO */}
+      {/* MODAL DE LOGIN E CADASTRO (animado) */}
       {/* ================================== */}
 
       {modalAberto && (
@@ -491,239 +488,199 @@ export default function Home() {
             }
           }}
         >
+          <style>{`
+            @keyframes move {
+              0%, 49.99% { opacity: 0; z-index: 1; }
+              50%, 100% { opacity: 1; z-index: 5; }
+            }
+          `}</style>
+
           <div
             role="dialog"
             aria-modal="true"
-            aria-labelledby="titulo-modal"
-            className="relative my-auto w-full max-w-[460px] overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl"
+            aria-label="Entrar ou criar conta"
+            className="relative my-auto min-h-[520px] w-[768px] max-w-full overflow-hidden rounded-[30px] bg-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]"
           >
-
             {/* Botão fechar */}
             <button
               type="button"
               onClick={fecharModal}
               aria-label="Fechar janela"
-              className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-xl text-gray-600 transition hover:bg-gray-200"
+              className="absolute right-4 top-4 z-[1100] flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-xl text-gray-600 transition hover:bg-gray-200"
             >
               ×
             </button>
 
-            {/* Cabeçalho */}
-            <div className="bg-[#0B1522] px-7 pb-7 pt-8 text-center">
-
-              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-xl font-bold text-white">
-                R
-              </div>
-
-              <h2
-                id="titulo-modal"
-                className="text-2xl font-bold text-white"
+            {/* ---------- Criar conta ---------- */}
+            <div
+              className={`absolute left-0 top-0 h-full w-full transition-all duration-[600ms] ease-in-out md:w-1/2 ${
+                ativo
+                  ? "z-[5] opacity-100 md:translate-x-full md:animate-[move_0.6s]"
+                  : "z-[1] opacity-0 max-md:hidden"
+              }`}
+            >
+              <form
+                onSubmit={handleCadastro}
+                className="flex h-full flex-col items-center justify-center bg-white px-10"
               >
-                {modoCadastro ? "Criar conta" : "Bem-vindo de volta"}
-              </h2>
+                <h1 className="mb-4 text-3xl font-bold text-gray-900">Criar Conta</h1>
+                <span className="mb-2 text-xs text-gray-500">
+                  {existemUsuarios ? "Cadastre um novo usuário" : "Crie a conta do administrador"}
+                </span>
 
-              <p className="mt-2 text-sm text-slate-400">
-                {modoCadastro
-                  ? "Preencha os dados para criar uma conta."
-                  : "Entre com suas credenciais para continuar."}
-              </p>
+                <input
+                  type="text"
+                  placeholder="Usuário"
+                  required
+                  value={regUsuario}
+                  onChange={(e) => setRegUsuario(e.target.value)}
+                  className={inputClasse}
+                />
+                <input
+                  type="password"
+                  placeholder="Senha"
+                  required
+                  value={regSenha}
+                  onChange={(e) => setRegSenha(e.target.value)}
+                  className={inputClasse}
+                />
+                <input
+                  type="password"
+                  placeholder="Confirmar senha"
+                  required
+                  value={regConfirmar}
+                  onChange={(e) => setRegConfirmar(e.target.value)}
+                  className={inputClasse}
+                />
+
+                {erroReg && <p className="mt-1 text-center text-sm text-red-500">{erroReg}</p>}
+
+                <button type="submit" className={botaoClasse}>
+                  Criar conta
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => trocar(false)}
+                  className="mt-4 text-sm text-gray-600 hover:underline md:hidden"
+                >
+                  Já tenho conta
+                </button>
+              </form>
             </div>
 
-            {/* Formulários */}
-            <div className="px-7 py-7">
+            {/* ---------- Entrar ---------- */}
+            <div
+              className={`absolute left-0 top-0 z-[2] h-full w-full transition-all duration-[600ms] ease-in-out md:w-1/2 ${
+                ativo ? "md:translate-x-full max-md:hidden" : ""
+              }`}
+            >
+              <form
+                onSubmit={handleLogin}
+                className="flex h-full flex-col items-center justify-center bg-white px-10"
+              >
+                <h1 className="mb-4 text-3xl font-bold text-gray-900">Entrar</h1>
+                <span className="mb-2 text-xs text-gray-500">use seu usuário e senha</span>
 
-              {!modoCadastro ? (
+                <input
+                  type="text"
+                  placeholder="Usuário"
+                  required
+                  value={usuario}
+                  onChange={(e) => setUsuario(e.target.value)}
+                  className={inputClasse}
+                />
+                <input
+                  type="password"
+                  placeholder="Senha"
+                  required
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                  className={inputClasse}
+                />
 
-                /* LOGIN */
-                <form
-                  onSubmit={handleLogin}
-                  className="space-y-4"
+                <Link
+                  href="/forgot-password"
+                  onClick={fecharModal}
+                  className="mb-1 mt-3 text-sm text-gray-700 hover:underline"
                 >
-                  <div>
-                    <label
-                      htmlFor="login-usuario"
-                      className="mb-2 block text-sm font-semibold text-gray-700"
-                    >
-                      Usuário
-                    </label>
+                  Esqueceu a senha?
+                </Link>
 
-                    <input
-                      id="login-usuario"
-                      type="text"
-                      placeholder="Digite seu usuário"
-                      autoComplete="username"
-                      required
-                      value={usuario}
-                      onChange={(event) => setUsuario(event.target.value)}
-                      className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-                    />
-                  </div>
+                {erroLogin && <p className="mt-1 text-center text-sm text-red-500">{erroLogin}</p>}
 
-                  <div>
-                    <label
-                      htmlFor="login-senha"
-                      className="mb-2 block text-sm font-semibold text-gray-700"
-                    >
-                      Senha
-                    </label>
+                <button type="submit" className={botaoClasse}>
+                  Entrar
+                </button>
 
-                    <input
-                      id="login-senha"
-                      type="password"
-                      placeholder="Digite sua senha"
-                      autoComplete="current-password"
-                      required
-                      value={senha}
-                      onChange={(event) => setSenha(event.target.value)}
-                      className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-                    />
-                  </div>
-
-                  <div className="flex justify-end">
-                    <Link
-                      href="/forgot-password"
-                      onClick={fecharModal}
-                      className="text-sm font-medium text-blue-600 hover:underline"
-                    >
-                      Esqueceu a senha?
-                    </Link>
-                  </div>
-
-                  {erroLogin && (
-                    <p
-                      role="alert"
-                      className="rounded-lg bg-red-50 p-3 text-center text-sm text-red-600"
-                    >
-                      {erroLogin}
-                    </p>
-                  )}
-
+                {podeCadastrar && (
                   <button
-                    type="submit"
-                    className="w-full rounded-lg bg-blue-600 py-3.5 text-sm font-bold text-white transition hover:bg-blue-700"
+                    type="button"
+                    onClick={() => trocar(true)}
+                    className="mt-4 text-sm text-gray-600 hover:underline md:hidden"
                   >
-                    Entrar no sistema →
+                    Criar uma conta
                   </button>
-
-                </form>
-
-              ) : (
-
-                /* CADASTRO */
-                <form
-                  onSubmit={handleCadastro}
-                  className="space-y-4"
-                >
-                  <div>
-                    <label
-                      htmlFor="cadastro-usuario"
-                      className="mb-2 block text-sm font-semibold text-gray-700"
-                    >
-                      Nome de usuário
-                    </label>
-
-                    <input
-                      id="cadastro-usuario"
-                      type="text"
-                      placeholder="Crie um usuário"
-                      autoComplete="username"
-                      required
-                      value={regUsuario}
-                      onChange={(event) => setRegUsuario(event.target.value)}
-                      className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="cadastro-senha"
-                      className="mb-2 block text-sm font-semibold text-gray-700"
-                    >
-                      Senha
-                    </label>
-
-                    <input
-                      id="cadastro-senha"
-                      type="password"
-                      placeholder="Crie uma senha"
-                      autoComplete="new-password"
-                      required
-                      value={regSenha}
-                      onChange={(event) => setRegSenha(event.target.value)}
-                      className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="cadastro-confirmar"
-                      className="mb-2 block text-sm font-semibold text-gray-700"
-                    >
-                      Confirmar senha
-                    </label>
-
-                    <input
-                      id="cadastro-confirmar"
-                      type="password"
-                      placeholder="Digite a senha novamente"
-                      autoComplete="new-password"
-                      required
-                      value={regConfirmar}
-                      onChange={(event) => setRegConfirmar(event.target.value)}
-                      className="w-full rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-                    />
-                  </div>
-
-                  {erroReg && (
-                    <p
-                      role="alert"
-                      className="rounded-lg bg-red-50 p-3 text-center text-sm text-red-600"
-                    >
-                      {erroReg}
-                    </p>
-                  )}
-
-                  <button
-                    type="submit"
-                    className="w-full rounded-lg bg-blue-600 py-3.5 text-sm font-bold text-white transition hover:bg-blue-700"
-                  >
-                    Criar conta →
-                  </button>
-
-                </form>
-              )}
-
-              {/* Alternar entre login e cadastro */}
-              <div className="mt-6 border-t border-gray-100 pt-5 text-center">
-
-                {podeCadastrar ? (
-                  <p className="text-sm text-gray-500">
-                    {modoCadastro
-                      ? "Já possui uma conta?"
-                      : "Ainda não possui uma conta?"}
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        alternarModo();
-                      }}
-                      className="ml-1 font-bold text-blue-600 hover:underline"
-                    >
-                      {modoCadastro ? "Entrar" : "Criar conta"}
-                    </button>
-                  </p>
-                ) : (
-                  <p className="text-sm text-gray-500">
-                    O acesso de novos usuários é criado pelo administrador.
-                  </p>
                 )}
+              </form>
+            </div>
 
+            {/* ---------- Painel que desliza (só no computador/tablet) ---------- */}
+            <div
+              className={`absolute left-1/2 top-0 z-[1000] hidden h-full w-1/2 overflow-hidden transition-all duration-[600ms] ease-in-out md:block ${
+                ativo ? "-translate-x-full rounded-[0_150px_100px_0]" : "rounded-[150px_0_0_100px]"
+              }`}
+            >
+              <div
+                className={`relative -left-full h-full w-[200%] bg-gradient-to-r from-gray-700 to-black text-white transition-all duration-[600ms] ease-in-out ${
+                  ativo ? "translate-x-1/2" : "translate-x-0"
+                }`}
+              >
+                {/* Painel esquerdo: aparece em "Criar conta" */}
+                <div
+                  className={`absolute top-0 flex h-full w-1/2 flex-col items-center justify-center px-8 text-center transition-all duration-[600ms] ease-in-out ${
+                    ativo ? "translate-x-0" : "-translate-x-[200%]"
+                  }`}
+                >
+                  <h1 className="text-3xl font-bold">Bem-vindo de volta!</h1>
+                  <p className="my-5 text-sm leading-5 tracking-wide">
+                    Já tem uma conta? Entre com seus dados para acessar o sistema.
+                  </p>
+                  <button type="button" onClick={() => trocar(false)} className={botaoPainelClasse}>
+                    Entrar
+                  </button>
+                </div>
+
+                {/* Painel direito: aparece em "Entrar" */}
+                <div
+                  className={`absolute right-0 top-0 flex h-full w-1/2 flex-col items-center justify-center px-8 text-center transition-all duration-[600ms] ease-in-out ${
+                    ativo ? "translate-x-[200%]" : "translate-x-0"
+                  }`}
+                >
+                  {podeCadastrar ? (
+                    <>
+                      <h1 className="text-3xl font-bold">
+                        {existemUsuarios ? "Olá, amigo!" : "Primeiro acesso"}
+                      </h1>
+                      <p className="my-5 text-sm leading-5 tracking-wide">
+                        {existemUsuarios
+                          ? "Cadastre um novo usuário para usar o sistema."
+                          : "Crie a conta do administrador para começar a usar o sistema."}
+                      </p>
+                      <button type="button" onClick={() => trocar(true)} className={botaoPainelClasse}>
+                        Criar conta
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <h1 className="text-3xl font-bold">Novo por aqui?</h1>
+                      <p className="my-5 text-sm leading-5 tracking-wide">
+                        Peça ao administrador do sistema para criar a sua conta.
+                      </p>
+                    </>
+                  )}
+                </div>
               </div>
-
-              <p className="mt-5 text-center text-[10px] text-gray-400">
-                SISTEMA DE GERENCIAMENTO DA REDE ESCOLAR
-              </p>
-
             </div>
           </div>
         </div>
