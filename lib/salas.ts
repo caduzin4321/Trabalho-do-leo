@@ -1,4 +1,6 @@
 
+import { notificarMudanca } from "./sync";
+
 export interface Sala {
   id: string;
   nome: string;
@@ -30,6 +32,7 @@ function writeAll(items: Sala[]) {
   if (typeof window === "undefined") return;
 
   window.localStorage.setItem(KEY, JSON.stringify(items));
+  notificarMudanca(KEY); // espelha no banco permanente
 }
 
 function criarSlug(nome: string): string {

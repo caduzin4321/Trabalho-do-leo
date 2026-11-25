@@ -5,6 +5,8 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usuariosStore, sessaoStore } from "@/lib/users";
+import { statusRemoto, loginRemoto, aplicarDados } from "@/lib/sync";
+import type { Usuario } from "@/lib/users";
 import ApresentacaoCarousel from "@/components/ApresentacaoCarousel";
 
 export default function Home() {
@@ -32,6 +34,11 @@ export default function Home() {
     setExistemUsuarios(usuariosStore.list().length > 0);
     setAdminLogado(!!sessaoStore.get()?.isAdmin);
     setPronto(true);
+    // Com o banco permanente ligado, "existem usuários" também vale para
+    // quem abre o site num navegador novo (sem dados locais).
+    void statusRemoto().then((s) => {
+      if (s.ativo && s.temUsuarios) setExistemUsuarios(true);
+    });
   }, []);
 
   // Fecha a janela com ESC e bloqueia a rolagem do fundo.
@@ -77,9 +84,23 @@ export default function Home() {
   }
 
   // Autenticação original do projeto
-  function handleLogin(event: FormEvent<HTMLFormElement>) {
+  async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    // 1) Tenta no banco permanente (restaura os dados em qualquer navegador).
+    const remoto = await loginRemoto(usuario, senha);
+    if (remoto.tipo === "negado") {
+      setErroLogin("Usuário ou senha incorretos.");
+      return;
+    }
+    if (remoto.tipo === "ok") {
+      aplicarDados(remoto.dados);
+      sessaoStore.set(remoto.usuario as Usuario);
+      router.push("/dashboard");
+      return;
+    }
+
+    // 2) Banco indisponível/vazio: login local original do projeto.
     const encontrado = usuariosStore.autenticar(usuario, senha);
 
     if (!encontrado) {

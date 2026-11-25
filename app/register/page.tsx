@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { usuariosStore, sessaoStore } from "@/lib/users";
+import { statusRemoto } from "@/lib/sync";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -15,9 +16,18 @@ export default function RegisterPage() {
   const [logadoComoAdmin, setLogadoComoAdmin] = useState(false);
 
   useEffect(() => {
-    const existemUsuarios = usuariosStore.list().length > 0;
     const sessao = sessaoStore.get();
+    void statusRemoto().then((s) => {
+      const existemUsuarios =
+        usuariosStore.list().length > 0 || (s.ativo && s.temUsuarios);
+      verificarAcesso(existemUsuarios, sessao);
+    });
+  }, []);
 
+  function verificarAcesso(
+    existemUsuarios: boolean,
+    sessao: ReturnType<typeof sessaoStore.get>
+  ) {
     if (!existemUsuarios) {
       setPodeAcessar(true);
       return;
@@ -30,7 +40,7 @@ export default function RegisterPage() {
     }
 
     setPodeAcessar(false);
-  }, []);
+  }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

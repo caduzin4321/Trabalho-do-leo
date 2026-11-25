@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usuariosStore } from "@/lib/users";
+import { usuariosStore, sessaoStore } from "@/lib/users";
+import { statusRemoto } from "@/lib/sync";
 
 const inputClasse =
   "my-2 w-full rounded-lg bg-gray-100 px-4 py-2.5 text-sm text-gray-900 placeholder-gray-500 outline-none focus:ring-2 focus:ring-gray-400";
@@ -20,9 +21,17 @@ export default function EsqueciSenhaPage() {
   const [erro, setErro] = useState("");
   const [sucesso, setSucesso] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setErro("");
+
+    // Com o banco permanente ligado, só um administrador logado pode redefinir
+    // senhas (senão qualquer pessoa poderia trocar a senha de qualquer conta).
+    const status = await statusRemoto();
+    if (status.ativo && status.temUsuarios && !sessaoStore.get()?.isAdmin) {
+      setErro("Peça a um administrador logado para redefinir sua senha.");
+      return;
+    }
 
     if (!usuario.trim() || !novaSenha) {
       setErro("Preencha o usuário e a nova senha.");

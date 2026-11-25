@@ -3,6 +3,8 @@
 // Quando migrar para um banco real, basta trocar as implementações destas
 // funções por chamadas de API (fetch) mantendo a mesma "assinatura".
 
+import { notificarMudanca } from "./sync";
+
 const KEYS = {
   pontosRede: "inv:pontosRede",
   patchPanels: "inv:patchPanels",
@@ -25,6 +27,7 @@ function readAll<T>(key: string): T[] {
 function writeAll<T>(key: string, items: T[]) {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(key, JSON.stringify(items));
+  notificarMudanca(key); // espelha no banco permanente
 }
 
 function genId(): string {

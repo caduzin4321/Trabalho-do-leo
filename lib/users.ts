@@ -1,3 +1,5 @@
+import { notificarMudanca } from "./sync";
+
 export interface Usuario {
   id: string;
   nomeUsuario: string;
@@ -39,6 +41,7 @@ function readAll(): Usuario[] {
 function writeAll(items: Usuario[]) {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(KEY, JSON.stringify(items));
+  notificarMudanca(KEY); // espelha no banco permanente
 }
 
 export const usuariosStore = {
