@@ -152,13 +152,11 @@ export default function AppSidebar({
         {/* Logo e nome */}
         <div className="flex h-20 items-center justify-between border-b border-white/10 px-4">
           <div className="flex items-center gap-3 overflow-hidden">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-xl font-bold">
-              R
-            </div>
+            <img src="/logo-nexo.png" alt="Nexo" className="h-10 w-10 shrink-0 object-contain" />
 
             {!recolhida && (
               <div className="min-w-0">
-                <h2 className="truncate font-bold">Rede Escolar</h2>
+                <h2 className="truncate font-bold">Nexo</h2>
                 <p className="text-xs text-slate-400">
                   Gerenciamento de rede
                 </p>

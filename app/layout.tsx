@@ -15,7 +15,7 @@ const geistMono = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Sistema de Gerenciamento da Rede Escolar",
+  title: "Nexo | Gerenciamento de Rede",
   description:
     "Sistema para gerenciamento de salas, inventário, usuários e equipamentos da rede escolar.",
 };

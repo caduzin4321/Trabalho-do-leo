@@ -126,7 +126,7 @@ export default function ConfiguracoesPage() {
           </h2>
 
           <p className="text-sm leading-7 text-slate-400">
-            Sistema de Gerenciamento da Rede Escolar, desenvolvido
+            Nexo, sistema de gerenciamento de rede, desenvolvido
             para auxiliar na organização das salas, inventário de
             cabeamento, identificação dos equipamentos e testes
             de certificação da infraestrutura de rede.
