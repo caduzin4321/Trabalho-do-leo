@@ -26,7 +26,7 @@ export default function ConfiguracoesPage() {
     <div className="min-h-screen px-5 py-16">
       <div className="mx-auto max-w-5xl">
         <div className="mb-8">
-          <p className="mb-2 text-sm text-blue-400">
+          <p className="mb-2 text-sm text-lime-300">
             Sistema / Configurações
           </p>
 
@@ -40,13 +40,13 @@ export default function ConfiguracoesPage() {
         </div>
 
         {/* Perfil */}
-        <section className="mb-6 rounded-xl border border-white/10 bg-[#0d1c30]/90 p-6">
+        <section className="mb-6 rounded-xl border border-white/10 bg-[#111D2A] p-6">
           <h2 className="mb-5 text-xl font-semibold text-white">
             Perfil do usuário
           </h2>
 
           <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 text-2xl font-bold text-white">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-lime-300 text-2xl font-bold text-[#101810]">
               {sessao.nomeUsuario.charAt(0).toUpperCase()}
             </div>
 
@@ -63,7 +63,7 @@ export default function ConfiguracoesPage() {
         </section>
 
         {/* Segurança */}
-        <section className="mb-6 rounded-xl border border-white/10 bg-[#0d1c30]/90 p-6">
+        <section className="mb-6 rounded-xl border border-white/10 bg-[#111D2A] p-6">
           <h2 className="mb-3 text-xl font-semibold text-white">
             Segurança
           </h2>
@@ -74,14 +74,14 @@ export default function ConfiguracoesPage() {
 
           <Link
             href="/forgot-password"
-            className="inline-flex rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+            className="inline-flex rounded-lg bg-lime-300 px-5 py-3 text-sm font-bold text-[#101810] transition hover:bg-lime-200"
           >
             Recuperar ou alterar senha
           </Link>
         </section>
 
         {/* Preferências */}
-        <section className="mb-6 rounded-xl border border-white/10 bg-[#0d1c30]/90 p-6">
+        <section className="mb-6 rounded-xl border border-white/10 bg-[#111D2A] p-6">
           <h2 className="mb-3 text-xl font-semibold text-white">
             Preferências do sistema
           </h2>
@@ -97,7 +97,7 @@ export default function ConfiguracoesPage() {
               </p>
             </div>
 
-            <span className="rounded-lg bg-blue-500/20 px-3 py-2 text-sm text-blue-300">
+            <span className="rounded-lg bg-lime-300/10 px-3 py-2 text-sm text-lime-300">
               Azul escuro
             </span>
           </div>
@@ -120,7 +120,7 @@ export default function ConfiguracoesPage() {
         </section>
 
         {/* Sobre */}
-        <section className="rounded-xl border border-white/10 bg-[#0d1c30]/90 p-6">
+        <section className="rounded-xl border border-white/10 bg-[#111D2A] p-6">
           <h2 className="mb-3 text-xl font-semibold text-white">
             Sobre o sistema
           </h2>
@@ -132,7 +132,7 @@ export default function ConfiguracoesPage() {
             de certificação da infraestrutura de rede.
           </p>
 
-          <p className="mt-4 text-xs text-slate-500">
+          <p className="mt-4 text-xs text-slate-400">
             Versão 1.0
           </p>
         </section>
@@ -140,7 +140,7 @@ export default function ConfiguracoesPage() {
         <div className="mt-8">
           <Link
             href="/dashboard"
-            className="text-sm font-medium text-blue-400 hover:text-blue-300"
+            className="text-sm font-medium text-lime-300 hover:text-lime-200"
           >
             ← Voltar ao painel principal
           </Link>

@@ -126,7 +126,7 @@ export default function CertificacaoPage() {
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <Card className="lg:col-span-1">
-            <h2 className="mb-4 font-semibold text-slate-800">Novo Teste</h2>
+            <h2 className="mb-4 font-semibold text-white">Novo Teste</h2>
             <form onSubmit={handleSubmit} className="space-y-3">
               <div>
                 <Label>Ponto de rede testado</Label>
@@ -160,7 +160,7 @@ export default function CertificacaoPage() {
                   ))}
                 </Select>
               </div>
-              <div className="rounded-md bg-slate-50 p-3 text-xs text-slate-500">
+              <div className="rounded-md bg-white/5 p-3 text-xs text-slate-400">
                 Limites para {form.categoriaCabo}: comprimento ≤{" "}
                 {limite.comprimentoMaximoM}m · perda de inserção ≤{" "}
                 {limite.perdaInsercaoMaxDb}dB · NEXT ≥ {limite.nextMinDb}dB ·
@@ -222,8 +222,8 @@ export default function CertificacaoPage() {
                 <div
                   className={`rounded-md p-3 text-sm ${
                     previa.resultado === "PASS"
-                      ? "bg-green-50 text-green-700"
-                      : "bg-red-50 text-red-700"
+                      ? "bg-green-500/10 text-green-300"
+                      : "bg-red-500/10 text-red-400"
                   }`}
                 >
                   <strong>{previa.resultado}</strong>
@@ -254,13 +254,13 @@ export default function CertificacaoPage() {
           </Card>
 
           <Card className="lg:col-span-2">
-            <h2 className="mb-4 font-semibold text-slate-800">
+            <h2 className="mb-4 font-semibold text-white">
               Testes Registrados ({testes.length})
             </h2>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead>
-                  <tr className="border-b border-slate-200 text-slate-500">
+                  <tr className="border-b border-white/10 text-slate-400">
                     <th className="py-2 pr-3">Ponto</th>
                     <th className="py-2 pr-3">Categoria</th>
                     <th className="py-2 pr-3">Comp.</th>
@@ -278,23 +278,23 @@ export default function CertificacaoPage() {
                     .map((t) => {
                       const ponto = pontos.find((p) => p.id === t.pontoRedeId);
                       return (
-                        <tr key={t.id} className="border-b border-slate-100">
-                          <td className="py-2 pr-3 font-medium text-slate-950">
+                        <tr key={t.id} className="border-b border-white/10">
+                          <td className="py-2 pr-3 font-medium text-white">
                             {ponto?.codigo ?? "—"}
                           </td>
-                          <td className="py-2 pr-3 text-slate-950">
+                          <td className="py-2 pr-3 text-white">
                             {t.categoriaCabo}
                           </td>
-                          <td className="py-2 pr-3 text-slate-950">
+                          <td className="py-2 pr-3 text-white">
                             {t.comprimentoMedidoM}m
                           </td>
-                          <td className="py-2 pr-3 text-slate-950">
+                          <td className="py-2 pr-3 text-white">
                             {t.perdaInsercaoDb}dB
                           </td>
-                          <td className="py-2 pr-3 text-slate-950">
+                          <td className="py-2 pr-3 text-white">
                             {t.nextDb}dB
                           </td>
-                          <td className="py-2 pr-3 text-slate-950">
+                          <td className="py-2 pr-3 text-white">
                             {t.returnLossDb}dB
                           </td>
                           <td className="py-2 pr-3">
@@ -307,7 +307,7 @@ export default function CertificacaoPage() {
                           <td className="py-2 pr-3">
                             <button
                               onClick={() => remover(t.id)}
-                              className="text-xs text-red-600 hover:underline"
+                              className="text-xs text-red-400 hover:underline"
                             >
                               remover
                             </button>

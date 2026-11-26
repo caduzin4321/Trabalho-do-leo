@@ -14,7 +14,7 @@ const rotuloSala = (s: Sala) => (s.bloco ? `${s.nome} — ${s.bloco}` : s.nome);
 // Aviso quando ainda não existe nenhuma sala cadastrada
 function SemSalas() {
   return (
-    <p className="mt-1 text-xs text-amber-600">
+    <p className="mt-1 text-xs text-amber-300">
       Nenhuma sala cadastrada.{" "}
       <Link href="/dashboard" className="font-medium underline">
         Crie uma no dashboard
@@ -45,7 +45,7 @@ export default function InventarioPage() {
               key={t.key}
               onClick={() => setTab(t.key as typeof tab)}
               className={`rounded-md px-4 py-2 text-sm font-medium ${
-                tab === t.key ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700"
+                tab === t.key ? "bg-lime-300 font-bold text-[#101810]" : "bg-white/5 text-slate-300"
               }`}
             >
               {t.label}
@@ -124,7 +124,7 @@ function PontosRedeTab() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
       <Card className="lg:col-span-1">
-        <h2 className="mb-4 font-semibold text-slate-800">Novo Ponto de Rede</h2>
+        <h2 className="mb-4 font-semibold text-white">Novo Ponto de Rede</h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <Label>Sala</Label>
@@ -185,11 +185,11 @@ function PontosRedeTab() {
       </Card>
 
       <Card className="lg:col-span-2">
-        <h2 className="mb-4 font-semibold text-slate-800">Pontos Cadastrados ({pontos.length})</h2>
+        <h2 className="mb-4 font-semibold text-white">Pontos Cadastrados ({pontos.length})</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 text-slate-500">
+              <tr className="border-b border-white/10 text-slate-400">
                 <th className="py-2 pr-3">Código</th>
                 <th className="py-2 pr-3">Sala / Bloco</th>
                 <th className="py-2 pr-3">Patch Panel</th>
@@ -204,7 +204,7 @@ function PontosRedeTab() {
                 const pp = patchPanels.find((x) => x.id === p.patchPanelId);
                 const sw = switches.find((x) => x.id === p.switchId);
                 return (
-                  <tr key={p.id} className="border-b border-slate-100 text-slate-900">
+                  <tr key={p.id} className="border-b border-white/10 text-white">
                     <td className="py-2 pr-3 font-medium">{p.codigo}</td>
                     <td className="py-2 pr-3">
                       {p.local}
@@ -215,7 +215,7 @@ function PontosRedeTab() {
                     <td className="py-2 pr-3">{p.categoriaCabo}</td>
                     <td className="py-2 pr-3">{p.comprimentoMetros}</td>
                     <td className="py-2 pr-3">
-                      <button onClick={() => remover(p.id)} className="text-xs text-red-600 hover:underline">
+                      <button onClick={() => remover(p.id)} className="text-xs text-red-400 hover:underline">
                         remover
                       </button>
                     </td>
@@ -265,7 +265,7 @@ function PatchPanelsTab() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
       <Card>
-        <h2 className="mb-4 font-semibold text-slate-800">Novo Patch Panel</h2>
+        <h2 className="mb-4 font-semibold text-white">Novo Patch Panel</h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <Label>Sala</Label>
@@ -283,16 +283,16 @@ function PatchPanelsTab() {
         </form>
       </Card>
       <Card className="lg:col-span-2">
-        <h2 className="mb-4 font-semibold text-slate-800">Patch Panels ({items.length})</h2>
+        <h2 className="mb-4 font-semibold text-white">Patch Panels ({items.length})</h2>
         <table className="w-full text-left text-sm">
-          <thead><tr className="border-b border-slate-200 text-slate-500"><th className="py-2 pr-3">Código</th><th className="py-2 pr-3">Sala</th><th className="py-2 pr-3">Portas</th><th></th></tr></thead>
+          <thead><tr className="border-b border-white/10 text-slate-400"><th className="py-2 pr-3">Código</th><th className="py-2 pr-3">Sala</th><th className="py-2 pr-3">Portas</th><th></th></tr></thead>
           <tbody>
             {items.map((i) => (
-              <tr key={i.id} className="border-b border-slate-100 text-slate-900">
+              <tr key={i.id} className="border-b border-white/10 text-white">
                 <td className="py-2 pr-3 font-medium">{i.codigo}</td>
                 <td className="py-2 pr-3">{i.local}</td>
                 <td className="py-2 pr-3">{i.totalPortas}</td>
-                <td><button onClick={() => remover(i.id)} className="text-xs text-red-600 hover:underline">remover</button></td>
+                <td><button onClick={() => remover(i.id)} className="text-xs text-red-400 hover:underline">remover</button></td>
               </tr>
             ))}
             {items.length === 0 && <tr><td colSpan={4} className="py-6 text-center text-slate-400">Nenhum patch panel cadastrado.</td></tr>}
@@ -335,7 +335,7 @@ function SwitchesTab() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
       <Card>
-        <h2 className="mb-4 font-semibold text-slate-800">Novo Switch</h2>
+        <h2 className="mb-4 font-semibold text-white">Novo Switch</h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <Label>Sala</Label>
@@ -354,17 +354,17 @@ function SwitchesTab() {
         </form>
       </Card>
       <Card className="lg:col-span-2">
-        <h2 className="mb-4 font-semibold text-slate-800">Switches ({items.length})</h2>
+        <h2 className="mb-4 font-semibold text-white">Switches ({items.length})</h2>
         <table className="w-full text-left text-sm">
-          <thead><tr className="border-b border-slate-200 text-slate-500"><th className="py-2 pr-3">Código</th><th className="py-2 pr-3">Sala</th><th className="py-2 pr-3">Modelo</th><th className="py-2 pr-3">Portas</th><th></th></tr></thead>
+          <thead><tr className="border-b border-white/10 text-slate-400"><th className="py-2 pr-3">Código</th><th className="py-2 pr-3">Sala</th><th className="py-2 pr-3">Modelo</th><th className="py-2 pr-3">Portas</th><th></th></tr></thead>
           <tbody>
             {items.map((i) => (
-              <tr key={i.id} className="border-b border-slate-100 text-slate-900">
+              <tr key={i.id} className="border-b border-white/10 text-white">
                 <td className="py-2 pr-3 font-medium">{i.codigo}</td>
                 <td className="py-2 pr-3">{i.local}</td>
                 <td className="py-2 pr-3">{i.modelo}</td>
                 <td className="py-2 pr-3">{i.totalPortas}</td>
-                <td><button onClick={() => remover(i.id)} className="text-xs text-red-600 hover:underline">remover</button></td>
+                <td><button onClick={() => remover(i.id)} className="text-xs text-red-400 hover:underline">remover</button></td>
               </tr>
             ))}
             {items.length === 0 && <tr><td colSpan={5} className="py-6 text-center text-slate-400">Nenhum switch cadastrado.</td></tr>}

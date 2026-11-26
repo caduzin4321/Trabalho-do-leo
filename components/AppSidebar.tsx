@@ -104,7 +104,7 @@ export default function AppSidebar({
         onClick={() => setMobileAberto(false)}
         className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all ${
           ativo
-            ? "bg-blue-600 text-white shadow-lg shadow-blue-950/30"
+            ? "bg-lime-300 font-bold text-[#101810] shadow-lg shadow-lime-300/10"
             : "text-slate-300 hover:bg-white/10 hover:text-white"
         }`}
       >
@@ -123,7 +123,7 @@ export default function AppSidebar({
       <button
         type="button"
         onClick={() => setMobileAberto(!mobileAberto)}
-        className="fixed left-4 top-4 z-[60] rounded-lg border border-white/10 bg-slate-900 p-3 text-white shadow-lg lg:hidden"
+        className="fixed left-4 top-4 z-[60] rounded-lg border border-white/10 bg-[#0C141F] p-3 text-white shadow-lg lg:hidden"
         aria-label="Abrir menu"
       >
         ☰
@@ -141,7 +141,7 @@ export default function AppSidebar({
 
       {/* Barra lateral */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex flex-col border-r border-white/10 bg-[#081525] text-white shadow-2xl transition-all duration-300 ${
+        className={`fixed inset-y-0 left-0 z-50 flex flex-col border-r border-white/10 bg-[#0C141F] text-white shadow-2xl transition-all duration-300 ${
           recolhida ? "w-20" : "w-72"
         } ${
           mobileAberto
@@ -187,7 +187,7 @@ export default function AppSidebar({
           {MENU.map((grupo) => (
             <section key={grupo.titulo}>
               {!recolhida && (
-                <p className="mb-3 px-3 text-xs font-bold uppercase tracking-wider text-slate-500">
+                <p className="mb-3 px-3 text-xs font-bold uppercase tracking-wider text-slate-400">
                   {grupo.titulo}
                 </p>
               )}
@@ -200,7 +200,7 @@ export default function AppSidebar({
 
           <section>
             {!recolhida && (
-              <p className="mb-3 px-3 text-xs font-bold uppercase tracking-wider text-slate-500">
+              <p className="mb-3 px-3 text-xs font-bold uppercase tracking-wider text-slate-400">
                 Conta
               </p>
             )}
@@ -218,7 +218,7 @@ export default function AppSidebar({
         <div className="border-t border-white/10 p-3">
           {!recolhida && (
             <div className="mb-3 flex items-center gap-3 rounded-xl bg-white/5 p-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 font-bold">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-lime-300 font-bold text-[#101810]">
                 {sessao.nomeUsuario.charAt(0).toUpperCase()}
               </div>
 

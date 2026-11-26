@@ -75,8 +75,8 @@ export default function SalaPage() {
               onClick={() => setTab(t.key as typeof tab)}
               className={`rounded-md px-4 py-2 text-sm font-medium ${
                 tab === t.key
-                  ? "bg-slate-900 text-white"
-                  : "bg-slate-100 text-slate-700"
+                  ? "bg-lime-300 font-bold text-[#101810]"
+                  : "bg-white/5 text-slate-300"
               }`}
             >
               {t.label}
@@ -144,7 +144,7 @@ function MaquinasTab({ sala }: { sala: SalaSlug }) {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
       <Card className="lg:col-span-1">
-        <h2 className="mb-4 font-semibold text-slate-800">Nova Máquina</h2>
+        <h2 className="mb-4 font-semibold text-white">Nova Máquina</h2>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <Label>Código / Nome</Label>
@@ -203,13 +203,13 @@ function MaquinasTab({ sala }: { sala: SalaSlug }) {
       </Card>
 
       <Card className="lg:col-span-2">
-        <h2 className="mb-4 font-semibold text-slate-800">
+        <h2 className="mb-4 font-semibold text-white">
           Máquinas nesta sala ({itens.length})
         </h2>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 text-slate-500">
+              <tr className="border-b border-white/10 text-slate-400">
                 <th className="py-2 pr-3">Código</th>
                 <th className="py-2 pr-3">Tipo</th>
                 <th className="py-2 pr-3">Patrimônio</th>
@@ -220,22 +220,22 @@ function MaquinasTab({ sala }: { sala: SalaSlug }) {
             </thead>
             <tbody>
               {itens.map((m) => (
-                <tr key={m.id} className="border-b border-slate-100">
-                  <td className="py-2 pr-3 font-medium text-slate-950">
+                <tr key={m.id} className="border-b border-white/10">
+                  <td className="py-2 pr-3 font-medium text-white">
                     {m.codigo}
                   </td>
-                  <td className="py-2 pr-3 text-slate-950">{m.tipo}</td>
-                  <td className="py-2 pr-3 text-slate-950">
+                  <td className="py-2 pr-3 text-white">{m.tipo}</td>
+                  <td className="py-2 pr-3 text-white">
                     {m.patrimonio}
                   </td>
-                  <td className="py-2 pr-3 text-slate-950">{m.ip}</td>
-                  <td className="py-2 pr-3 text-slate-950">
+                  <td className="py-2 pr-3 text-white">{m.ip}</td>
+                  <td className="py-2 pr-3 text-white">
                     {m.observacoes}
                   </td>
                   <td>
                     <button
                       onClick={() => remover(m.id)}
-                      className="text-xs text-red-600 hover:underline"
+                      className="text-xs text-red-400 hover:underline"
                     >
                       remover
                     </button>
@@ -331,11 +331,11 @@ function CabeamentoTab({ sala }: { sala: SalaSlug }) {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
       <Card className="lg:col-span-1">
-        <h2 className="mb-4 font-semibold text-slate-800">
+        <h2 className="mb-4 font-semibold text-white">
           Novo Ponto de Cabeamento
         </h2>
         {(patchPanels.length === 0 || switches.length === 0) && (
-          <p className="mb-3 text-xs text-amber-600">
+          <p className="mb-3 text-xs text-amber-300">
             Cadastre patch panels e switches no módulo{" "}
             <Link href="/inventario" className="underline">
               Inventário
@@ -455,13 +455,13 @@ function CabeamentoTab({ sala }: { sala: SalaSlug }) {
       </Card>
 
       <Card className="lg:col-span-2">
-        <h2 className="mb-4 font-semibold text-slate-800">
+        <h2 className="mb-4 font-semibold text-white">
           Cabeamento desta sala ({pontos.length})
         </h2>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 text-slate-500">
+              <tr className="border-b border-white/10 text-slate-400">
                 <th className="py-2 pr-3">Código</th>
                 <th className="py-2 pr-3">Local</th>
                 <th className="py-2 pr-3">Patch Panel</th>
@@ -473,28 +473,28 @@ function CabeamentoTab({ sala }: { sala: SalaSlug }) {
             </thead>
             <tbody>
               {pontos.map((p) => (
-                <tr key={p.id} className="border-b border-slate-100">
-                  <td className="py-2 pr-3 font-medium text-slate-950">
+                <tr key={p.id} className="border-b border-white/10">
+                  <td className="py-2 pr-3 font-medium text-white">
                     {p.codigo}
                   </td>
-                  <td className="py-2 pr-3 text-slate-950">{p.local}</td>
-                  <td className="py-2 pr-3 text-slate-950">
+                  <td className="py-2 pr-3 text-white">{p.local}</td>
+                  <td className="py-2 pr-3 text-white">
                     {nomePatchPanel(p.patchPanelId)} / porta{" "}
                     {p.portaPatchPanel}
                   </td>
-                  <td className="py-2 pr-3 text-slate-950">
+                  <td className="py-2 pr-3 text-white">
                     {nomeSwitch(p.switchId)} / porta {p.portaSwitch}
                   </td>
-                  <td className="py-2 pr-3 text-slate-950">
+                  <td className="py-2 pr-3 text-white">
                     {p.categoriaCabo}
                   </td>
-                  <td className="py-2 pr-3 text-slate-950">
+                  <td className="py-2 pr-3 text-white">
                     {p.comprimentoMetros}m
                   </td>
                   <td>
                     <button
                       onClick={() => remover(p.id)}
-                      className="text-xs text-red-600 hover:underline"
+                      className="text-xs text-red-400 hover:underline"
                     >
                       remover
                     </button>

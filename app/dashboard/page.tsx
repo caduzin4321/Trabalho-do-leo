@@ -164,9 +164,9 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {MODULOS.map((m) => (
             <Link key={m.href} href={m.href}>
-              <div className="h-full rounded-lg border border-white/20 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
-                <h2 className="mb-2 font-semibold text-slate-900">{m.titulo}</h2>
-                <p className="text-sm text-slate-500">{m.desc}</p>
+              <div className="h-full rounded-lg border border-white/10 bg-[#111D2A] p-5 transition hover:border-blue-400/40">
+                <h2 className="mb-2 font-semibold text-white">{m.titulo}</h2>
+                <p className="text-sm text-slate-400">{m.desc}</p>
               </div>
             </Link>
           ))}
@@ -179,7 +179,7 @@ export default function DashboardPage() {
             <h2 className="text-xl font-bold text-white">Minhas Salas ({salas.length})</h2>
             <button
               onClick={abrirModalNova}
-              className="flex items-center gap-1 rounded-md bg-white px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-200"
+              className="flex items-center gap-1 rounded-md bg-lime-300 px-4 py-2 text-sm font-bold text-[#101810] hover:bg-lime-200"
             >
               <span className="text-lg leading-none">+</span> Adicionar Sala
             </button>
@@ -197,7 +197,7 @@ export default function DashboardPage() {
                   <div
                     key={s.id}
                     onClick={() => setSalaSelecionadaId(s.id)}
-                    className="group relative cursor-pointer rounded-lg border border-white/20 bg-white px-4 py-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                    className="group relative cursor-pointer rounded-lg border border-white/10 bg-[#111D2A] px-4 py-3 transition hover:-translate-y-0.5 hover:border-blue-400/40"
                   >
                     <button
                       onClick={(e) => {
@@ -205,14 +205,14 @@ export default function DashboardPage() {
                         removerSala(s.id, s.nome);
                       }}
                       title="Remover sala"
-                      className="absolute right-2 top-2 rounded p-1 text-slate-300 transition-colors hover:bg-red-50 hover:text-red-600"
+                      className="absolute right-2 top-2 rounded p-1 text-slate-300 transition-colors hover:bg-red-500/10 hover:text-red-400"
                     >
                       <IconeLixeira className="h-4 w-4" />
                     </button>
 
-                    <h3 className="truncate pr-6 text-sm font-semibold text-slate-900">{s.nome}</h3>
+                    <h3 className="truncate pr-6 text-sm font-semibold text-white">{s.nome}</h3>
                     <p className="truncate text-xs text-slate-400">{s.bloco || "—"}</p>
-                    <p className="mt-2 text-xs text-slate-500">
+                    <p className="mt-2 text-xs text-slate-400">
                       {d.pontos.length} pontos · {d.pp.length} PP · {d.sw.length} SW
                     </p>
                   </div>
@@ -232,17 +232,17 @@ export default function DashboardPage() {
             onClick={() => setSalaSelecionadaId(null)}
           >
             <div
-              className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-xl bg-white p-6 shadow-xl"
+              className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-xl bg-[#111D2A] p-6 shadow-xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="mb-4 flex items-start justify-between gap-4">
                 <div>
-                  <h2 className="text-lg font-bold text-slate-900">{salaSelecionada.nome}</h2>
+                  <h2 className="text-lg font-bold text-white">{salaSelecionada.nome}</h2>
                   {salaSelecionada.bloco && (
-                    <p className="text-sm text-slate-500">{salaSelecionada.bloco}</p>
+                    <p className="text-sm text-slate-400">{salaSelecionada.bloco}</p>
                   )}
                   {salaSelecionada.descricao && (
-                    <p className="mt-1 text-sm text-slate-600">{salaSelecionada.descricao}</p>
+                    <p className="mt-1 text-sm text-slate-300">{salaSelecionada.descricao}</p>
                   )}
                   <p className="mt-1 text-xs text-slate-400">
                     Criada em {new Date(salaSelecionada.criadoEm).toLocaleDateString("pt-BR")}
@@ -252,13 +252,13 @@ export default function DashboardPage() {
                   <button
                     onClick={() => removerSala(salaSelecionada.id, salaSelecionada.nome)}
                     title="Remover sala"
-                    className="rounded p-1.5 text-slate-400 transition-colors hover:bg-red-50 hover:text-red-600"
+                    className="rounded p-1.5 text-slate-400 transition-colors hover:bg-red-500/10 hover:text-red-400"
                   >
                     <IconeLixeira className="h-5 w-5" />
                   </button>
                   <button
                     onClick={() => setSalaSelecionadaId(null)}
-                    className="px-1 text-2xl leading-none text-slate-400 hover:text-slate-700"
+                    className="px-1 text-2xl leading-none text-slate-400 hover:text-slate-200"
                     aria-label="Fechar"
                   >
                     ×
@@ -267,22 +267,22 @@ export default function DashboardPage() {
               </div>
 
               <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="rounded-md bg-slate-100 py-2">
-                  <p className="text-lg font-bold text-slate-900">{d.pontos.length}</p>
-                  <p className="text-xs text-slate-500">Pontos</p>
+                <div className="rounded-md bg-white/5 py-2">
+                  <p className="text-lg font-bold text-white">{d.pontos.length}</p>
+                  <p className="text-xs text-slate-400">Pontos</p>
                 </div>
-                <div className="rounded-md bg-slate-100 py-2">
-                  <p className="text-lg font-bold text-slate-900">{d.pp.length}</p>
-                  <p className="text-xs text-slate-500">Patch Panels</p>
+                <div className="rounded-md bg-white/5 py-2">
+                  <p className="text-lg font-bold text-white">{d.pp.length}</p>
+                  <p className="text-xs text-slate-400">Patch Panels</p>
                 </div>
-                <div className="rounded-md bg-slate-100 py-2">
-                  <p className="text-lg font-bold text-slate-900">{d.sw.length}</p>
-                  <p className="text-xs text-slate-500">Switches</p>
+                <div className="rounded-md bg-white/5 py-2">
+                  <p className="text-lg font-bold text-white">{d.sw.length}</p>
+                  <p className="text-xs text-slate-400">Switches</p>
                 </div>
               </div>
 
               <div className="mt-5">
-                <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">
                   Pontos de Rede
                 </h4>
                 {d.pontos.length === 0 ? (
@@ -291,7 +291,7 @@ export default function DashboardPage() {
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs">
                       <thead>
-                        <tr className="border-b border-slate-200 text-slate-500">
+                        <tr className="border-b border-white/10 text-slate-400">
                           <th className="py-1 pr-2">Código</th>
                           <th className="py-1 pr-2">Patch Panel</th>
                           <th className="py-1 pr-2">Switch</th>
@@ -303,8 +303,8 @@ export default function DashboardPage() {
                           const pp = patchPanels.find((x) => x.id === p.patchPanelId);
                           const sw = switches.find((x) => x.id === p.switchId);
                           return (
-                            <tr key={p.id} className="border-b border-slate-100">
-                              <td className="py-1 pr-2 font-medium text-slate-900">{p.codigo}</td>
+                            <tr key={p.id} className="border-b border-white/10">
+                              <td className="py-1 pr-2 font-medium text-white">{p.codigo}</td>
                               <td className="py-1 pr-2">{pp ? `${pp.codigo} / ${p.portaPatchPanel}` : "—"}</td>
                               <td className="py-1 pr-2">{sw ? `${sw.codigo} / ${p.portaSwitch}` : "—"}</td>
                               <td className="py-1 pr-2">{p.categoriaCabo}</td>
@@ -318,13 +318,13 @@ export default function DashboardPage() {
               </div>
 
               <div className="mt-4">
-                <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">
                   Patch Panels
                 </h4>
                 {d.pp.length === 0 ? (
                   <p className="text-sm text-slate-400">Nenhum patch panel nesta sala.</p>
                 ) : (
-                  <ul className="space-y-1 text-sm text-slate-700">
+                  <ul className="space-y-1 text-sm text-slate-200">
                     {d.pp.map((p) => (
                       <li key={p.id}>
                         <span className="font-medium">{p.codigo}</span> — {p.totalPortas} portas
@@ -335,13 +335,13 @@ export default function DashboardPage() {
               </div>
 
               <div className="mt-4">
-                <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                <h4 className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-400">
                   Switches
                 </h4>
                 {d.sw.length === 0 ? (
                   <p className="text-sm text-slate-400">Nenhum switch nesta sala.</p>
                 ) : (
-                  <ul className="space-y-1 text-sm text-slate-700">
+                  <ul className="space-y-1 text-sm text-slate-200">
                     {d.sw.map((w) => (
                       <li key={w.id}>
                         <span className="font-medium">{w.codigo}</span>
@@ -354,7 +354,7 @@ export default function DashboardPage() {
 
               <Link
                 href="/inventario"
-                className="mt-5 inline-block text-xs font-medium text-slate-600 hover:underline"
+                className="mt-5 inline-block text-xs font-medium text-slate-300 hover:underline"
               >
                 Gerenciar no inventário →
               </Link>
@@ -370,14 +370,14 @@ export default function DashboardPage() {
           onClick={() => setModalNovaAberto(false)}
         >
           <div
-            className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl"
+            className="w-full max-w-md rounded-xl bg-[#111D2A] p-6 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-slate-900">Nova Sala</h2>
+              <h2 className="text-lg font-bold text-white">Nova Sala</h2>
               <button
                 onClick={() => setModalNovaAberto(false)}
-                className="text-2xl leading-none text-slate-400 hover:text-slate-700"
+                className="text-2xl leading-none text-slate-400 hover:text-slate-200"
                 aria-label="Fechar"
               >
                 ×
@@ -386,7 +386,7 @@ export default function DashboardPage() {
 
             <form onSubmit={salvarSala} className="space-y-3">
               <div>
-                <label className="mb-1 block text-xs font-medium text-slate-600">
+                <label className="mb-1 block text-xs font-medium text-slate-300">
                   Nome da sala *
                 </label>
                 <input
@@ -394,7 +394,7 @@ export default function DashboardPage() {
                   value={form.nome}
                   onChange={(e) => setForm({ ...form, nome: e.target.value })}
                   placeholder="ex: Sala 101"
-                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400"
+                  className="w-full rounded-md border border-white/10 px-3 py-2 text-sm text-white placeholder-slate-500 bg-[#0C141F] focus:outline-none focus:ring-2 focus:ring-lime-300/60"
                 />
                 <p className="mt-1 text-xs text-slate-400">
                   Use o mesmo nome no campo &quot;Local&quot; do inventário para os equipamentos aparecerem aqui.
@@ -402,19 +402,19 @@ export default function DashboardPage() {
               </div>
 
               <div>
-                <label className="mb-1 block text-xs font-medium text-slate-600">
+                <label className="mb-1 block text-xs font-medium text-slate-300">
                   Bloco / Andar
                 </label>
                 <input
                   value={form.bloco}
                   onChange={(e) => setForm({ ...form, bloco: e.target.value })}
                   placeholder="ex: Bloco A - 1º andar"
-                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400"
+                  className="w-full rounded-md border border-white/10 px-3 py-2 text-sm text-white placeholder-slate-500 bg-[#0C141F] focus:outline-none focus:ring-2 focus:ring-lime-300/60"
                 />
               </div>
 
               <div>
-                <label className="mb-1 block text-xs font-medium text-slate-600">
+                <label className="mb-1 block text-xs font-medium text-slate-300">
                   Descrição / Observações
                 </label>
                 <textarea
@@ -422,23 +422,23 @@ export default function DashboardPage() {
                   value={form.descricao}
                   onChange={(e) => setForm({ ...form, descricao: e.target.value })}
                   placeholder="ex: Laboratório de informática"
-                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-400"
+                  className="w-full rounded-md border border-white/10 px-3 py-2 text-sm text-white placeholder-slate-500 bg-[#0C141F] focus:outline-none focus:ring-2 focus:ring-lime-300/60"
                 />
               </div>
 
-              {erro && <p className="text-sm text-red-600">{erro}</p>}
+              {erro && <p className="text-sm text-red-400">{erro}</p>}
 
               <div className="flex justify-end gap-2 pt-2">
                 <button
                   type="button"
                   onClick={() => setModalNovaAberto(false)}
-                  className="rounded-md bg-slate-100 px-4 py-2 text-sm font-medium text-slate-900 hover:bg-slate-200"
+                  className="rounded-md bg-white/5 px-4 py-2 text-sm font-medium text-white hover:bg-white/20"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700"
+                  className="rounded-md bg-lime-300 px-4 py-2 text-sm font-bold text-[#101810] hover:bg-lime-200"
                 >
                   Criar Sala
                 </button>

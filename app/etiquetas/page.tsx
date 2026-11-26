@@ -45,7 +45,7 @@ export default function EtiquetasPage() {
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <Card>
-            <h2 className="mb-4 font-semibold text-slate-800">Configuração</h2>
+            <h2 className="mb-4 font-semibold text-white">Configuração</h2>
             <div className="space-y-3">
               <div>
                 <Label>Padrão da etiqueta</Label>
@@ -112,19 +112,19 @@ export default function EtiquetasPage() {
           </Card>
 
           <Card>
-            <h2 className="mb-4 font-semibold text-slate-800">
+            <h2 className="mb-4 font-semibold text-white">
               Pré-visualização ({etiquetas.length})
             </h2>
             <div className="max-h-[420px] space-y-2 overflow-y-auto">
               {etiquetas.map((cod, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center justify-between rounded-md border border-dashed border-slate-300 px-3 py-2 font-mono text-sm"
+                  className="flex items-center justify-between rounded-md border border-dashed border-white/10 px-3 py-2 font-mono text-sm"
                 >
                   <span>{cod}</span>
                   <button
                     onClick={() => navigator.clipboard.writeText(cod)}
-                    className="text-xs text-slate-500 hover:underline"
+                    className="text-xs text-slate-400 hover:underline"
                   >
                     copiar
                   </button>

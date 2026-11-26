@@ -11,7 +11,7 @@ export function Input(props: InputHTMLAttributes<HTMLInputElement>) {
     <input
       {...props}
       className={
-        "w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 placeholder-slate-400 bg-white focus:outline-none focus:ring-2 focus:ring-slate-400 " +
+        "w-full rounded-md border border-white/10 px-3 py-2 text-sm text-white placeholder-slate-500 bg-[#0C141F] focus:outline-none focus:ring-2 focus:ring-lime-300/60 " +
         (props.className ?? "")
       }
     />
@@ -23,7 +23,7 @@ export function Select(props: SelectHTMLAttributes<HTMLSelectElement>) {
     <select
       {...props}
       className={
-        "w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-slate-400 " +
+        "w-full rounded-md border border-white/10 px-3 py-2 text-sm text-white bg-[#0C141F] focus:outline-none focus:ring-2 focus:ring-lime-300/60 " +
         (props.className ?? "")
       }
     />
@@ -37,9 +37,9 @@ export function Button(
 ) {
   const { variant = "primary", className, ...rest } = props;
   const styles = {
-    primary: "bg-slate-900 text-white hover:bg-slate-700",
-    secondary: "bg-slate-100 text-slate-900 hover:bg-slate-200",
-    danger: "bg-red-600 text-white hover:bg-red-500",
+    primary: "bg-lime-300 font-bold text-[#101810] hover:bg-lime-200",
+    secondary: "bg-white/10 text-white hover:bg-white/20",
+    danger: "bg-red-500/15 text-red-300 hover:bg-red-500/25",
   }[variant];
   return (
     <button
@@ -60,7 +60,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`rounded-lg border border-slate-200 bg-white p-5 shadow-sm ${
+      className={`rounded-lg border border-white/10 bg-[#111D2A] p-5 shadow-none ${
         className ?? ""
       }`}
     >
@@ -71,7 +71,7 @@ export function Card({
 
 export function Label({ children }: { children: ReactNode }) {
   return (
-    <label className="mb-1 block text-xs font-medium text-slate-600">
+    <label className="mb-1 block text-xs font-medium text-slate-300">
       {children}
     </label>
   );
@@ -85,9 +85,9 @@ export function Badge({
   color: "green" | "red" | "slate";
 }) {
   const styles = {
-    green: "bg-green-100 text-green-700",
-    red: "bg-red-100 text-red-700",
-    slate: "bg-slate-100 text-slate-700",
+    green: "bg-green-500/15 text-green-300",
+    red: "bg-red-500/15 text-red-300",
+    slate: "bg-white/5 text-slate-300",
   }[color];
   return (
     <span

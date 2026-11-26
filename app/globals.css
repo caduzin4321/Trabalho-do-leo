@@ -1,16 +1,18 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Paleta da página inicial:
+   fundo #080D14 · seções #0C141F · cards #111D2A · rodapé #060B12
+   destaque verde-limão (lime-300) · bordas white/10 */
 :root {
-  --background: #07111f;
+  --background: #080d14;
   --foreground: #f1f5f9;
 }
 
 html {
   min-height: 100%;
-  background: #07111f;
+  background: #080d14;
 }
 
 body {
@@ -22,7 +24,7 @@ body {
   background: transparent;
 }
 
-/* Fundo tecnológico inspirado em redes escolares */
+/* Fundo escuro com brilhos suaves (azul e verde-limão), como na página inicial */
 body::before {
   content: "";
   position: fixed;
@@ -30,24 +32,19 @@ body::before {
   z-index: -1;
   pointer-events: none;
 
-  background-color: #07111f;
+  background-color: #080d14;
   background-image:
     radial-gradient(
       circle at 15% 20%,
-      rgba(14, 165, 233, 0.16),
+      rgba(37, 99, 235, 0.1),
       transparent 35%
     ),
     radial-gradient(
       circle at 85% 75%,
-      rgba(37, 99, 235, 0.16),
+      rgba(190, 242, 100, 0.05),
       transparent 38%
     ),
-    linear-gradient(
-      135deg,
-      #07111f 0%,
-      #0b1729 50%,
-      #081321 100%
-    );
+    linear-gradient(135deg, #080d14 0%, #0c141f 50%, #080d14 100%);
 }
 
 /* Textura discreta de pontos */
@@ -59,12 +56,18 @@ body::after {
   pointer-events: none;
 
   background-image: radial-gradient(
-    rgba(125, 211, 252, 0.15) 1px,
+    rgba(255, 255, 255, 0.12) 1px,
     transparent 1px
   );
 
   background-size: 32px 32px;
-  opacity: 0.28;
+  opacity: 0.2;
+}
+
+/* Lista suspensa dos campos <select> no tema escuro */
+select option {
+  background: #0c141f;
+  color: #ffffff;
 }
 
 /* Evita imagens e elementos ultrapassando a tela */

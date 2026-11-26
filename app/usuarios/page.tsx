@@ -57,7 +57,7 @@ export default function UsuariosPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-slate-200 text-slate-500">
+                <tr className="border-b border-white/10 text-slate-400">
                   <th className="py-2 pr-3">Usuário</th>
                   <th className="py-2 pr-3">Criado em</th>
                   <th className="py-2 pr-3"></th>
@@ -65,22 +65,22 @@ export default function UsuariosPage() {
               </thead>
               <tbody>
                 {usuarios.map((u) => (
-                  <tr key={u.id} className="border-b border-slate-100 ">
-                    <td className="py-2 pr-3 font-medium text-slate-950">
+                  <tr key={u.id} className="border-b border-white/10 ">
+                    <td className="py-2 pr-3 font-medium text-white">
                       {u.nomeUsuario}
                       {sessao.id === u.id && (
-                        <span className="ml-2 rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-950">
+                        <span className="ml-2 rounded-full bg-white/5 px-2 py-0.5 text-xs text-white">
                           você
                         </span>
                       )}
                     </td>
-                    <td className="py-2 pr-3 text-slate-950">
+                    <td className="py-2 pr-3 text-white">
                       {new Date(u.criadoEm).toLocaleString("pt-BR")}
                     </td>
                     <td className="py-2 pr-3 ">
                       <button
                         onClick={() => remover(u.id, u.nomeUsuario)}
-                        className="text-xs text-red-600 hover:underline"
+                        className="text-xs text-red-400 hover:underline"
                       >
                         remover
                       </button>
